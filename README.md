@@ -1,6 +1,8 @@
-# Comparative study of protein aggregation propensity and mutation tolerance between naked mole-rat and mouse
+## Comparative study of protein aggregation propensity and mutation tolerance between naked mole-rat and mouse
 
-Biorxiv:
+Biorxiv: https://doi.org/10.1101/2021.08.20.457120 
+
 Corresponding author: Savandara Besse
 
-Detailed README.md that provide detailed description of this repo will be available soon.
+Exhautive description: available soon.
+
