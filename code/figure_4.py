@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
 import statsmodels.sandbox.stats.multicomp as multicomp
 
-from Bio import SeqIO
 
 def is_significant(mut_tol):
     if mut_tol > 2 :

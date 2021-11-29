@@ -6,7 +6,7 @@ from optparse import OptionParser
 import numpy as np
 import pandas as pd
 import seaborn as sns
-import os, multiprocessing, progressbar, time
+import os, multiprocessing, progressbar, signal, time
 
 
 def init_worker(tqdm_lock=None):

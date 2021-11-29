@@ -57,7 +57,7 @@ def generate_tree(rodent_table, rodent_tree):
     ts.layout_fn = my_layout
 
     rodent_tree.render("%%inline", w=800, tree_style=ts)
-    rodent_tree.render("../figures/FIGURE1_A.png", dpi=300, tree_style=ts)
+    rodent_tree.render("../figures/FIGURE1_A_v2.png", dpi=300, tree_style=ts)
     # rodent_tree.render("../figures/FIGURE1_A.svg", dpi=300, tree_style=ts)
     # rodent_tree.render("../figures/FIGURE1_A.pdf", dpi=300, tree_style=ts)
 
@@ -84,9 +84,9 @@ def generate_scatterplots(rodent_table):
     axes[2].set_ylabel('log10 Maximum lifespan (year)', fontsize=12, labelpad=15)
     axes[2].tick_params(axis='both', direction='out', length=6, width=1, colors='black', grid_color='black', grid_alpha=0.5, labelleft=True)
 
-    fig.savefig('../figures/FIGURE1_BCD.png', format='png', quality=300)
-    # fig.savefig('../figures/FIGURE1_BCD.svg', format='svg', quality=300)
-    # fig.savefig('../figures/FIGURE1_BCD.pdf', format='pdf', quality=300)
+    fig.savefig('../figures/FIGURE1_BCD_v2.png', format='png')
+    # fig.savefig('../figures/FIGURE1_BCD.svg', format='svg')
+    # fig.savefig('../figures/FIGURE1_BCD.pdf', format='pdf')
 
     rodent_table = rodent_table.dropna()
     corr, pval = stats.pearsonr(x=rodent_table['Body mass (g)'], y=rodent_table['Maximum longevity (yrs)'])
@@ -101,7 +101,7 @@ def generate_scatterplots(rodent_table):
 
 if __name__ == "__main__":
     rodent_tree = ete3.Tree('../data/phylogeny/rodent_in_anage_phylogeny.nwk', format=1)
-    rodent_anage_table = pd.read_csv('../data/anage/rodent_table.csv')
+    rodent_anage_table = pd.read_csv('../data/anage/rodent_table_v2.csv')
     #### Generate Figure 1
     generate_tree(rodent_anage_table, rodent_tree)
     #### Generate Figure 1 B,C,D
