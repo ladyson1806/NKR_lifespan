@@ -1,6 +1,7 @@
 from tqdm import tqdm
 from Bio import SeqIO
 from Bio.Seq import Seq
+from Bio.Seq import MutableSeq
 from optparse import OptionParser
 
 import numpy as np
@@ -45,7 +46,7 @@ def isValid(seqDict, org, subset):
         else:
             tmp.append([cds_id, 'non_standard_length', False])
     cds_validity = pd.DataFrame(tmp, columns=['proteinID', 'description', 'valid_cds'])
-    cds_validity.to_csv(f'./data/table/{org}_{subset}_seq_validity.csv', sep=',', index=False)
+    # cds_validity.to_csv(f'../data/{org}_{subset}_seq_validity.csv', sep=',', index=False)
     return cds_validity
 
 
@@ -57,14 +58,18 @@ def get_nr_mutants(cds_id, cds):
                         'G': ['A', 'C', 'T']
                     }
     all_mut_dict = {}
-    all_mut_dict[f'{cds_id}_WT'] = str(cds.translate()).replace('*','')
+    wt = str(cds.translate(to_stop=True))
+    all_mut_dict[f'{cds_id}_WT'] = wt
     for i in range(len(cds)) :
         for j in range(3):
-            mutant = cds.tomutable()
+            mutant = MutableSeq(str(cds))
             mutant[i] = set_mutations[cds[i]][j]
-            seq = str(mutant.toseq().translate()).replace('*', '')
-            if seq not in all_mut_dict.values():
-                all_mut_dict[f'{cds_id}_{i}_{cds[i]}{set_mutations[cds[i]][j]}'] = str(mutant.toseq().translate()).replace('*', '')
+            mt = str(Seq(str(mutant)).translate(to_stop=True))
+            if (len(wt) != len(mt)) or (mt[0] != 'M'):
+                pass
+            else :
+                if mt not in all_mut_dict.values():
+                    all_mut_dict[f'{cds_id}_{i}_{cds[i]}{set_mutations[cds[i]][j]}'] = mt
     return all_mut_dict
 
 
@@ -89,7 +94,7 @@ def createSeqFile(args):
 if __name__ == '__main__':
     parser = OptionParser()
     parser.add_option("-o", "--organism", dest="org", default="None", help="[Required] Provide the name of the organism (MM or HG)")
-    parser.add_option("-s", "--subset", dest="subset", default="None", help="[Required] Provide subset name (chap_client)")
+    parser.add_option("-s", "--subset", dest="subset", default="None", help="[Required] Provide subset name (all or atx or chap_client)")
     parser.add_option("-e", "--output_path", dest="outPath", default="None", help="[Required] Provide name of the result folder")
     (options, args) = parser.parse_args()
     org = options.org
@@ -107,6 +112,8 @@ if __name__ == '__main__':
         fastaFile = '../../data/ortholog_dataset/uni_MM_cds_orthologs.faa'
         if 'chap_client' in subset:
             idList = chap_clt_sub['proteinID_y'].values
+        elif 'atx' in subset:
+            idList = ['P28658', 'Q9CVD2']
         else :
             subset ='others'
             idList = all_agg_scores[~all_agg_scores['proteinID_y'].isin(chap_clt_sub['proteinID_y'])].values
@@ -114,6 +121,8 @@ if __name__ == '__main__':
         fastaFile = '../../data/ortholog_dataset/uni_HG_cds_orthologs.faa'
         if 'chap_client' in subset:
             idList = chap_clt_sub['proteinID_x'].values
+        elif 'atx' in subset:
+            idList = ['G5BVC0', 'G5AZL7']
         else :
             subset = 'others'
             idList = all_agg_scores[~all_agg_scores['proteinID_x'].isin(chap_clt_sub['proteinID_x'])].values
@@ -129,7 +138,7 @@ if __name__ == '__main__':
     #### Create seq file
     print('Creation of Seq files')
     args =  [ (seq_id, seqSubset, outPath) for seq_id in valid_seq ]
-    p = multiprocessing.Pool(initializer=init_worker, initargs=(tqdm.get_lock(),), processes=10)
+    p = multiprocessing.Pool(initializer=init_worker, initargs=(tqdm.get_lock(),), processes=4)
     try:
         pbar = tqdm(myfolders, maxinterval=1.0, miniters=1, desc="Written files", bar_format="{desc}:{percentage:3.0f}%|{bar}|")
         for _, result in enumerate(p.imap_unordered(createSeqFile, args, chunksize=1)):
