@@ -62,6 +62,9 @@ def generate_tree(rodent_table, rodent_tree):
     # rodent_tree.render("../figures/FIGURE1_A.pdf", dpi=300, tree_style=ts)
 
 def generate_scatterplots(rodent_table):
+    sns.set_context("paper", font_scale=2)
+    sns.set_style("ticks") 
+    sns.despine(offset=20)
     fig,axes = plt.subplots(nrows=1, ncols=3, figsize=(15, 5), sharey=True)
 
     focus = (rodent_table['Common name'] == 'House mouse') | (rodent_table['Common name'] == 'Naked mole-rat')
