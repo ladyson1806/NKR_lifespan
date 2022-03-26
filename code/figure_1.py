@@ -65,7 +65,7 @@ def generate_scatterplots(rodent_table):
     sns.set_context("paper", font_scale=2)
     sns.set_style("ticks") 
     sns.despine(offset=20)
-    fig,axes = plt.subplots(nrows=1, ncols=3, figsize=(15, 5), sharey=True)
+    fig,axes = plt.subplots(nrows=1, ncols=3, figsize=(18, 6), sharey=True)
 
     focus = (rodent_table['Common name'] == 'House mouse') | (rodent_table['Common name'] == 'Naked mole-rat')
     rodent_table['Rodents'] = np.where(focus==True, "Chosen species", "Other rodents")
@@ -73,18 +73,18 @@ def generate_scatterplots(rodent_table):
     markers = {"Chosen species": "s", "Other rodents": "X"}
 
     sns.scatterplot(y=np.log10(rodent_table['Maximum longevity (yrs)']), x=np.log10(rodent_table['Body mass (g)']), hue=rodent_table['color'], hue_order=['blue', 'red', 'green', 'orange'], palette=['blue', 'red', 'green', 'orange'], style=rodent_table['Rodents'], markers=['s','o'], style_order=['Chosen species', 'Other rodents'], legend=False, ax=axes[0])
-    axes[0].set_xlabel('log10 Adult weight (gram)', fontsize=12)
-    axes[0].set_ylabel('log10 Maximum lifespan (year)', fontsize=12, labelpad=15)
+    axes[0].set_xlabel('log10 Adult weight (gram)', fontsize=14)
+    axes[0].set_ylabel('log10 Maximum lifespan (year)', fontsize=14)
 
 
     sns.scatterplot(y=np.log10(rodent_table['Maximum longevity (yrs)']), x=np.log10(rodent_table['Metabolic rate (W)']), hue=rodent_table['color'], hue_order=['blue', 'red', 'green', 'orange'], palette=['blue', 'red', 'green', 'orange'], style=rodent_table['Rodents'], markers=['s','o'], style_order=['Chosen species', 'Other rodents'], legend=False, ax=axes[1])
-    axes[1].set_xlabel('log10 Basal metabolic rate (W)', fontsize=12)
-    axes[1].set_ylabel('log10 Maximum lifespan (year)', fontsize=12, labelpad=15)
+    axes[1].set_xlabel('log10 Basal metabolic rate (W)', fontsize=14)
+    axes[1].set_ylabel('log10 Maximum lifespan (year)', fontsize=14)
     axes[1].tick_params(axis='both', direction='out', length=6, width=1, colors='black', grid_color='black', grid_alpha=0.5, labelleft=True)
 
     sns.scatterplot(y=np.log10(rodent_table['Maximum longevity (yrs)']), x=np.log10(rodent_table['Female maturity (days)']), hue=rodent_table['color'], hue_order=['blue', 'red', 'green', 'orange'], palette=['blue', 'red', 'green', 'orange'], style=rodent_table['Rodents'], markers=['s','o'], style_order=['Chosen species', 'Other rodents'], legend=False,ax=axes[2])
-    axes[2].set_xlabel('log10 Female maturity (day)', fontsize=12)
-    axes[2].set_ylabel('log10 Maximum lifespan (year)', fontsize=12, labelpad=15)
+    axes[2].set_xlabel('log10 Female maturity (day)', fontsize=14)
+    axes[2].set_ylabel('log10 Maximum lifespan (year)', fontsize=14)
     axes[2].tick_params(axis='both', direction='out', length=6, width=1, colors='black', grid_color='black', grid_alpha=0.5, labelleft=True)
 
     fig.savefig('../figures/FIGURE1_BCD_v2.png', format='png')

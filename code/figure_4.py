@@ -37,8 +37,8 @@ def generate_figure_4A(prot_muttol_table, col_x, col_y):
 
     fig = plt.figure(figsize= (8, 8))
     sns.scatterplot(x=prot_muttol_table[col_x], y=prot_muttol_table[col_y], hue=prot_muttol_table['MT_DIFF'], hue_order=['non significant', 'HIGH', 'LOW'], palette=['black', 'purple', 'salmon'],legend=False)
-    plt.ylabel('Mouse mutation tolerance')
-    plt.xlabel('Naked mole-rat mutation tolerance')
+    plt.ylabel('Mouse strict mutation tolerance')
+    plt.xlabel('Naked mole-rat strict mutation tolerance')
     
     
     print(f'Stats for mouse vs. naked mole-rat mutation tolerance ')
@@ -65,14 +65,14 @@ def generate_figure_4BC(prot_muttol_table, col_x, col_y):
     sns.regplot(x=prot_muttol_table['Aggregation_y'], y=prot_muttol_table[col_y], color='black', ax=axes[0])
     sns.regplot(x=mm_mutTol['Aggregation_y'], y=mm_mutTol[col_y], color='salmon', ax=axes[0])
     axes[0].set_xlabel('Mouse whole-protein sequence \n aggregation propensity score')
-    axes[0].set_ylabel('Mouse mutation tolerance')
+    axes[0].set_ylabel('Mouse strict mutation tolerance')
     axes[0].set_xlim([0, 25])
     axes[0].set_ylim([0, 1])
 
     sns.regplot(x=prot_muttol_table['Aggregation_x'], y=prot_muttol_table[col_x], color='black', ax=axes[1])
     sns.regplot(x=hg_mutTol['Aggregation_x'], y=hg_mutTol[col_x], color='purple')
     plt.xlabel('Naked mole-rat whole-protein sequence \n aggregation propensity score', )
-    plt.ylabel('Naked mole-rat mutation tolerance', labelpad=5)
+    plt.ylabel('Naked mole-rat strict mutation tolerance', labelpad=5)
     axes[1].set_xlim([0, 25])
     axes[1].set_ylim([0, 1])
     axes[1].tick_params(axis='both', direction='out', length=6, width=1, colors='black', grid_color='black', grid_alpha=0.5, labelleft=True)
