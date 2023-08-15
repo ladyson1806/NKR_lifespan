@@ -10,5 +10,5 @@
 - [ ] __08-15-2023__: Available soon
   
 ## Code maintenance
-- Savandara Besse (@ladyson1806)
+- Savandara Besse (@ladyson1806) : savandara.besse @ cri-paris.org
 
