@@ -7,7 +7,7 @@
 > Savandara Besse, Raphaël Poujol, Julie G. Hussin, Comparative Study of Protein Aggregation Propensity and Mutation Tolerance Between Naked Mole-Rat and Mouse, Genome Biology and Evolution, Volume 14, Issue 5, May 2022, evac057, https://doi.org/10.1093/gbe/evac057
 
 ## Code description
-- Available soon
+- [ ] 08-15-2023: Available soon
   
 ## Code maintenance
 - Savandara Besse (@ladyson1806)
