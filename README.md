@@ -1,6 +1,10 @@
 # Comparative study of protein aggregation propensity and mutation tolerance between naked mole-rat and mouse
 - __Université de Montréal (2018-2021)__
 - Savandara Besse, Raphaël Poujol, Julie Hussin
+  - Department of Biochemistry, Université de Montréal, Montréal, Québec, Canada (SB)
+  - Robert-Cedergren Center for Bioinformatics and Genomics, Université de Montréal, Montréal, Québec, Canada (SB)
+  - Institut de Cardiologie de Montréal, Montréal, Québec, Canada (RP, JH)
+  - Département de Médecine, Faculté de Médecine, Université de Montréal, Montréal, Québec, Canada (JH)
 
 
 ## Now published in Genome, Biology and Evolution (2022)
